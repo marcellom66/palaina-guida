@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PalAIna – come funziona</title>
-<meta name="description" content="Pannello a LED con gli arrivi dei bus alle tue fermate, un’AI che legge gli avvisi e comandi con Alexa. Come funziona, come si configura, manuale PDF.">
+<title>PalAIna – la palina che ti dice quando uscire</title>
+<meta name="description" content="Un piccolo tabellone luminoso, come quello della fermata, ma in casa tua: ti dice fra quanti minuti passa il bus e quando è ora di uscire.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f4f2ee" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
@@ -12,147 +12,261 @@
 <link rel="icon" href="data:,">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="it_IT">
-<meta property="og:title" content="PalAIna – come funziona">
-<meta property="og:description" content="Pannello a LED con gli arrivi dei bus alle tue fermate, un’AI che legge gli avvisi e comandi con Alexa. Come funziona, come si configura, manuale PDF.">
+<meta property="og:title" content="PalAIna – la palina che ti dice quando uscire">
+<meta property="og:description" content="Un piccolo tabellone luminoso, come quello della fermata, ma in casa tua: ti dice fra quanti minuti passa il bus e quando è ora di uscire.">
 <meta property="og:url" content="https://marcellom66.github.io/palaina-guida/">
-<meta property="og:image" content="https://marcellom66.github.io/palaina-guida/img/display_arrivi.png">
+<meta property="og:image" content="https://marcellom66.github.io/palaina-guida/img/display_fiera_ferm.png">
 <meta property="og:image:width" content="640">
 <meta property="og:image:height" content="320">
 <meta property="og:image:alt" content="Il pannello a LED della PalAIna con tre arrivi di autobus">
 <style>
-:root{--bg:#f4f2ee;--card:#fff;--tx:#1c1b19;--mut:#6b675f;--line:#e2ded6;--acc:#d97a00;--acc-tx:#fff;
-  --link:#a65800;--btn:#b35c00;--soft:#faf8f4;--chip:#111;--chip-line:#111;--frame:#e2ded6}
-@media (prefers-color-scheme:dark){:root{--bg:#141311;--card:#1f1d1a;--tx:#eeeae3;--mut:#a39d92;--line:#35322d;
-  --acc:#ffb000;--acc-tx:#1c1b19;--link:#ffb000;--btn:#ffb000;--soft:#26231f;--chip:#0b0a09;--chip-line:#4a453e;--frame:#5a554c}}
+:root{--bg:#f4f2ee;--card:#fff;--tx:#1c1b19;--mut:#625e56;--line:#e2ded6;--acc:#d97a00;
+  --link:#9a5200;--btn:#b35c00;--btn-tx:#fff;--soft:#faf8f4;--wall:#ebe3d5;--wall2:#e4dac7;--base:#cdc1aa;
+  --il-line:#2a2723;--il-soft:#f1e6d1;--il-paper:#fffdf8;--il-amber:#ffb000;--il-dark:#16140f;--il-acc:#d97a00;--il-dim:#3c3730;
+  --ok:#2f7a3b;--okbg:#e8f3ea;--warnbg:#fdebd0}
+@media (prefers-color-scheme:dark){:root{--bg:#141311;--card:#1f1d1a;--tx:#eeeae3;--mut:#aaa498;--line:#37332d;--acc:#ffb000;
+  --link:#ffb000;--btn:#ffb000;--btn-tx:#1c1b19;--soft:#26231f;--wall:#2d2923;--wall2:#27231e;--base:#1c1915;
+  --il-line:#e9e2d4;--il-soft:#35302a;--il-paper:#2c2924;--il-amber:#ffb000;--il-dark:#0d0c0a;--il-acc:#ffb000;--il-dim:#4b453c;
+  --ok:#7fd48c;--okbg:#1f2e22;--warnbg:#3a2a12}}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-main{max-width:720px;margin:0 auto;padding:16px 16px 8px}
-h1,h2,h3,p,ul,ol,dl,dd,figure{margin:0}
-h1,h2,.slogan{text-wrap:balance}
+body{margin:0;background:var(--bg);color:var(--tx);font:18px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:720px;margin:0 auto;padding:12px 18px 0;overflow-wrap:break-word}
+h1,h2,h3,p,ul,ol,dl,dd,figure,blockquote{margin:0}
+h1,h2,h3{text-wrap:balance}
 a{color:var(--link)}
-a:focus-visible{outline:3px solid var(--link);outline-offset:3px;border-radius:4px}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--link);outline-offset:3px;border-radius:6px}
 strong{font-weight:700}
 .nw{white-space:nowrap}
-code,.mono{font-family:ui-monospace,Menlo,Consolas,monospace;overflow-wrap:anywhere}
-main{overflow-wrap:break-word}
-section[id]{scroll-margin-top:12px}
+section[id]{scroll-margin-top:8px}
+
+/* titoli */
+h1{font-size:clamp(34px,10.4vw,52px);line-height:1.08;letter-spacing:-.015em;font-weight:800}
+h2{font-size:clamp(28px,7.6vw,36px);line-height:1.15;letter-spacing:-.01em;font-weight:800;margin-bottom:14px}
+h3{font-size:21px;line-height:1.3;font-weight:700}
+.lead{font-size:20px;line-height:1.5;color:var(--mut)}
+section.band{padding:56px 0 0}
+section.band>.lead,section.band>p.intro{margin-bottom:26px}
+p+p{margin-top:12px}
+.mut{color:var(--mut)}
+
+/* illustrazioni */
+svg.il{display:block;width:100%;height:100%}
+.il .ln{stroke:var(--il-line);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.il .th{stroke-width:2.5}
+.il .fig{stroke-width:6}
+.il .bg{fill:var(--il-soft)}
+.il .am{fill:var(--il-amber)}
+.il .pp{fill:var(--il-paper)}
+.il .dk{fill:var(--il-dark)}
+.il .dim{fill:var(--il-dim)}
+.il .wh{fill:#fff}
+.il .vi{fill:#a24dff}
+.il .rd{fill:#d9372b}
+.il .og{fill:#ff8a00}
+.il .ar{fill:none;stroke:var(--il-acc);stroke-width:5;stroke-linecap:round}
+.il .nl{stroke:none}
 
 /* intestazione */
-.hero{padding:20px 4px 22px}
-.brand{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.logo{background:#111;color:#ffb000;font:bold 14px ui-monospace,Menlo,Consolas,monospace;padding:4px 8px;border-radius:5px;letter-spacing:1px;border:1px solid var(--chip-line)}
-.brand .tag{color:var(--mut);font-size:15px}
-h1{font-size:clamp(30px,9vw,42px);line-height:1.1;letter-spacing:-.01em;margin-bottom:12px}
-.lead{font-size:18px;line-height:1.5;margin-bottom:10px}
-.lead.sub{color:var(--mut);font-size:17px;margin-bottom:20px}
-.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:58px;padding:12px 20px;border-radius:14px;
-  background:var(--btn);color:var(--acc-tx);font-weight:700;font-size:19px;line-height:1.25;text-align:center;text-decoration:none;
-  box-shadow:0 2px 0 rgba(0,0,0,.22)}
-.btn:hover{filter:brightness(1.05)}
+.hero{padding:14px 0 0}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.logo{background:#111;color:#ffb000;font:bold 15px ui-monospace,Menlo,Consolas,monospace;padding:5px 9px;border-radius:6px;letter-spacing:1.5px;border:1px solid #4a453e}
+.brand .tag{color:var(--mut);font-size:16px}
+.hero h1{margin-bottom:14px}
+.hero .lead{margin-bottom:24px}
+
+/* il pannello appeso al muro */
+.wall{position:relative;border-radius:24px;padding:24px 10px 44px;overflow:hidden;
+  background:repeating-linear-gradient(90deg,transparent 0 46px,rgba(120,100,70,.07) 46px 47px),linear-gradient(var(--wall),var(--wall2))}
+.wall::after{content:"";position:absolute;left:0;right:0;bottom:0;height:16px;background:var(--base);box-shadow:0 -2px 0 rgba(0,0,0,.08)}
+.panel{position:relative;max-width:560px;margin:0 auto;padding:13px;border-radius:14px;border:2px solid #2d2a26;
+  background:
+    radial-gradient(circle at 8px 8px,#6d675d 2.2px,transparent 2.8px),
+    radial-gradient(circle at calc(100% - 8px) 8px,#6d675d 2.2px,transparent 2.8px),
+    radial-gradient(circle at 8px calc(100% - 8px),#6d675d 2.2px,transparent 2.8px),
+    radial-gradient(circle at calc(100% - 8px) calc(100% - 8px),#6d675d 2.2px,transparent 2.8px),
+    #0e0d0b;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 18px 26px -10px rgba(40,25,5,.5),0 3px 5px rgba(40,25,5,.3),0 0 46px rgba(255,140,0,.16)}
+.panel img{display:block;width:100%;height:auto;border-radius:4px}
+.hero figcaption{margin-top:14px}
+figcaption{color:var(--mut);font-size:16px;line-height:1.45;margin-top:10px;text-align:center}
+.wall-cap{position:relative;z-index:1}
+
+/* vai a */
+.jump{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-top:20px;font-size:16px}
+.jump-label{color:var(--mut);margin-right:2px}
+.jump a{display:inline-flex;align-items:center;min-height:44px;padding:0 13px;border:1px solid var(--line);border-radius:22px;background:var(--card);color:var(--link);font-weight:700;text-decoration:none}
+.jump a.pdf{border-style:dashed}
+
+/* tre schede: che cos'è */
+.cards{list-style:none;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.cards li{display:grid;grid-template-columns:92px minmax(0,1fr);gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px 18px 16px 14px}
+.cards .pic{width:92px;height:92px}
+.cards h3{margin-bottom:4px;text-wrap:pretty}
+.cards p{color:var(--mut);font-size:17px;line-height:1.45}
+
+/* come si legge */
+.annot{margin-top:6px}
+.annot .panel{padding:16px 16px 34px}
+.ai{position:relative}
+.ai img{display:block}
+.ai .col{position:absolute;top:24%;bottom:0;border:2px dashed #ffb000;border-radius:6px;pointer-events:none}
+.ai .c1{left:0;width:32%}.ai .c2{left:34%;width:37%}.ai .c3{left:74%;width:26%}
+.ai .badge{position:absolute;top:100%;transform:translate(-50%,-4px)}
+.ai .b1{left:16%}.ai .b2{left:52.5%}.ai .b3{left:87%}
+.badge{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#ffb000;color:#1c1b19;font:800 19px/1 system-ui,sans-serif;box-shadow:0 0 0 3px #0e0d0b}
+.legend{list-style:none;padding:0;margin-top:22px;counter-reset:lg;display:grid;gap:14px}
+.legend li{counter-increment:lg;display:grid;grid-template-columns:34px minmax(0,1fr);gap:14px;align-items:start}
+.legend li::before{content:counter(lg);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#ffb000;color:#1c1b19;font:800 19px/1 system-ui,sans-serif;margin-top:1px}
+.legend li>div>strong{display:block;font-size:20px;line-height:1.3}
+.legend li>div span{color:var(--mut)}
+.legend .ora{display:inline;font-size:inherit;color:var(--tx)}
+
+.sub{display:flex;align-items:center;gap:14px;margin:46px 0 8px}
+.sub .tl{flex:none;width:34px;height:60px}
+.sub h3{font-size:26px;line-height:1.2;font-weight:800}
+.colors{list-style:none;padding:0;display:grid;gap:12px;margin-top:16px}
+.colors li{display:grid;grid-template-columns:76px minmax(0,1fr);gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 16px 12px 12px}
+.chip{display:block;background:#0e0d0b;border-radius:12px;font:800 32px/1 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:16px 0 14px;text-align:center;
+  box-shadow:inset 0 0 0 1px #35312b}
+.cw{color:#fff;text-shadow:0 0 10px rgba(255,255,255,.45)}
+.cv{color:#b565ff;text-shadow:0 0 10px rgba(165,70,255,.6)}
+.cr{color:#ff4a3d;text-shadow:0 0 10px rgba(255,60,40,.55)}
+.co{color:#ff8a00;text-shadow:0 0 10px rgba(255,138,0,.5)}
+.colors li>div>strong{display:block;font-size:20px;line-height:1.3}
+.colors li>div span{color:var(--mut);font-size:17px;line-height:1.45;display:block}
+.colors li.apart{border-style:dashed}
+.example{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 16px 18px}
+.example h4{margin:0 0 6px;font-size:21px;line-height:1.3}
+.strip{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:3px;margin-top:16px}
+.strip b{display:block;text-align:center;font:800 16px/1 system-ui,sans-serif;padding:12px 0;border-radius:6px;background:#fff;color:#1c1b19;border:1px solid #cfc9bd}
+.strip b.v{background:#8f2ee8;color:#fff;border-color:#8f2ee8}
+.strip b.r{background:#c42b20;color:#fff;border-color:#c42b20}
+.strip i{font-style:normal;font-size:14px;line-height:1.25;text-align:center;color:var(--mut);padding-top:6px}
+.strip i:nth-of-type(1){grid-column:1/4}.strip i:nth-of-type(2){grid-column:4/7}.strip i:nth-of-type(3){grid-column:7/12}
+.example p{margin-top:12px;font-size:17px;line-height:1.5}
+.example .small{color:var(--mut);font-size:16px}
+.orange-fig{margin-top:22px}
+.orange-fig .panel{max-width:340px;padding:12px}
+
+/* come funziona: tre disegni */
+.flow{list-style:none;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:46px}
+.flow li{position:relative;text-align:center}
+.flow .pic{width:170px;height:170px;margin:0 auto 10px}
+.flow h3{margin-bottom:6px}
+.flow p{color:var(--mut);max-width:30em;margin-left:auto;margin-right:auto}
+.flow li:not(:last-child)::after{content:"";position:absolute;left:50%;bottom:-34px;width:16px;height:16px;margin-left:-8px;
+  border-right:5px solid var(--acc);border-bottom:5px solid var(--acc);border-radius:2px;transform:rotate(45deg)}
+
+/* come si mette in funzione */
+.steps{list-style:none;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:16px;counter-reset:st}
+.steps li{counter-increment:st;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px 18px 22px;display:grid;grid-template-columns:44px minmax(0,1fr);column-gap:14px;align-content:start}
+.steps li::before{content:counter(st);grid-column:1;grid-row:2;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--btn);color:var(--btn-tx);font:800 24px/1 system-ui,sans-serif}
+.steps .pic{grid-column:1/-1;grid-row:1;height:190px;margin:0 auto 14px;width:100%;display:flex;align-items:center;justify-content:center}
+.steps h3{grid-column:2;grid-row:2;align-self:center}
+.steps p{grid-column:2;grid-row:3;margin-top:6px}
+.steps .pic svg.il{width:150px;height:150px}
+.steps p{color:var(--mut)}
+.shot{position:relative;width:250px;height:190px;overflow:hidden;border:1px solid var(--line);border-bottom:0;border-radius:22px 22px 0 0;background:#f4f2ee;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+.shot img{display:block;width:100%;height:auto}
+.shot::after{content:"";position:absolute;left:0;right:0;bottom:0;height:46px;background:linear-gradient(transparent,var(--card))}
+.steps .panel{width:100%;max-width:290px;padding:10px;border-radius:10px}
+.more{margin-top:22px;text-align:center;font-size:19px}
+.more a{display:inline-block;padding:10px 0;font-weight:700}
+
+/* intelligenza artificiale */
+.notice{background:var(--card);border:1px solid var(--line);border-left:6px solid #ff8a00;border-radius:16px;padding:16px 18px 18px}
+.notice .tag{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;margin-bottom:6px}
+.notice .tag svg{flex:none;width:30px;height:30px}
+.notice blockquote{font-size:20px;line-height:1.45;font-weight:600}
+.notice .hint{margin-top:8px;color:var(--mut);font-size:16px}
+.down{display:block;width:16px;height:16px;margin:16px auto 20px;border-right:5px solid var(--acc);border-bottom:5px solid var(--acc);border-radius:2px;transform:rotate(45deg)}
+.reader{display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;align-items:center}
+.reader .pic{width:96px;height:96px}
+.answers{display:grid;gap:12px}
+.ans{border-radius:16px;padding:14px 18px;border:1px solid var(--line);background:var(--card)}
+.ans small{display:block;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--mut);font-weight:700}
+.ans strong{display:block;font-size:20px;line-height:1.35;margin-top:2px}
+.ans.skip{background:var(--warnbg);border-color:#e9b46a}
+.ans.fine{background:var(--okbg);border-color:#8bc79a}
+.who{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin-top:30px}
+.who>div{border:1px solid var(--line);border-radius:18px;padding:16px 18px;background:var(--soft)}
+.who h3{margin-bottom:4px}
+.who p{color:var(--mut)}
+.slogan{font-size:26px;line-height:1.25;font-weight:800;text-align:center;margin-top:26px;text-wrap:balance}
+.small{font-size:16px;color:var(--mut)}
+.slogan+.small{text-align:center;margin-top:10px}
+
+/* domande */
+.faq{display:grid;gap:0}
+.faq>div{padding:20px 0;border-top:1px solid var(--line)}
+.faq>div:first-child{border-top:0;padding-top:4px}
+.faq h3{font-size:22px;margin-bottom:6px}
+.faq p{color:var(--tx)}
+.faq p+p{margin-top:10px}
+
+/* manuale e fonti */
+.btn{display:flex;align-items:center;justify-content:center;gap:12px;min-height:60px;padding:12px 22px;border-radius:16px;
+  background:var(--btn);color:var(--btn-tx);font-weight:800;font-size:20px;line-height:1.25;text-align:center;text-decoration:none;box-shadow:0 2px 0 rgba(0,0,0,.22);max-width:460px}
+.btn:hover{filter:brightness(1.06)}
 .btn:active{transform:translateY(1px);box-shadow:none}
 .btn:focus-visible{outline:3px solid var(--tx);outline-offset:3px}
 .btn svg{flex:none}
-.hero .btn{max-width:440px}
-.btn-note{color:var(--mut);font-size:14px;margin-top:8px}
-.jump{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin-top:10px;font-size:13px}
-.jump-label{color:var(--mut);margin-right:2px}
-.jump a{display:inline-flex;align-items:center;min-height:44px;padding:0 11px;border:1px solid var(--line);border-radius:22px;background:var(--card);color:var(--link);font-weight:600;text-decoration:none}
-
-/* schede */
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:14px}
-h2{font-size:24px;line-height:1.2;letter-spacing:-.005em;margin-bottom:12px}
-h3{font-size:18px;line-height:1.3;margin:20px 0 8px}
-h2+h3{margin-top:4px}
-p+p,p+ul,ul+p,p+dl,dl+p,p+figure,figure+p{margin-top:12px}
-.muted{color:var(--mut)}
-.small{font-size:14px;color:var(--mut)}
-.note{background:var(--soft);border:1px solid var(--line);border-left:5px solid var(--acc);border-radius:10px;padding:12px 14px;margin-top:14px}
-
-/* elenchi */
-.ticks{list-style:none;padding:0}
-.ticks li{position:relative;padding:0 0 0 26px;margin-top:10px}
-.ticks li::before{content:"";position:absolute;left:3px;top:.5em;width:11px;height:11px;border-radius:50%;background:var(--acc)}
-.rows>div{padding:11px 0;border-top:1px solid var(--line)}
-.rows dt{font-weight:700}
-.rows dd{margin-top:2px}
-
-/* come funziona: tre tappe */
-.flow{list-style:none;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin-top:14px}
-.flow li{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--soft)}
-.flow b{display:block;font-size:17px;margin-bottom:2px}
-.flow .n{display:inline-block;width:26px;height:26px;line-height:26px;text-align:center;border-radius:50%;background:var(--btn);color:var(--acc-tx);font-size:15px;margin-right:8px}
-
-/* display a LED */
-.led{display:block;width:100%;max-width:640px;height:auto;margin:14px auto 0;border-radius:10px;background:#111;border:1px solid var(--chip-line)}
-figure.ledfig{margin-top:14px}
-figure.ledfig .led{margin-top:0}
-figcaption{color:var(--mut);font-size:14px;margin-top:8px;text-align:center}
-.chip{display:inline-block;background:var(--chip);border:1px solid var(--chip-line);border-radius:8px;font:800 21px/1 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:12px 8px;min-width:58px;text-align:center}
-.colors{list-style:none;padding:0}
-.colors li{display:grid;grid-template-columns:58px minmax(0,1fr);gap:14px;align-items:start;padding:12px 0;border-top:1px solid var(--line)}
-.c-w{color:#fff}.c-o{color:#e08a00}.c-v{color:#9b30ff}.c-r{color:#c42b20}
-.msg{display:inline-block;background:var(--chip);border:1px solid var(--chip-line);color:#ffb000;font:700 14px/1.35 ui-monospace,Menlo,Consolas,monospace;padding:3px 8px;border-radius:6px;overflow-wrap:anywhere}
-
-/* passi con catture del telefono */
-.step{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;padding:20px 0 4px;margin-top:18px;border-top:1px solid var(--line)}
-.step:first-of-type{margin-top:6px}
-.step h3{margin:0}
-.kicker{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--link);margin-bottom:2px}
-.step ul{margin-top:10px}
-.shot{width:100%;max-width:320px;margin-left:auto;margin-right:auto;border:1px solid var(--frame);border-radius:16px;overflow:hidden;background:#f4f2ee;
-  box-shadow:0 2px 10px rgba(0,0,0,.12)}
-.shot img{display:block;width:100%;height:auto;aspect-ratio:var(--ar);object-fit:cover;object-position:top}
-.shot.dark{background:#111}
-.split .shot{margin-top:16px}
-.how{padding-left:22px}
-.how li{margin-top:8px;padding-left:4px}
-.say{font-weight:700}
-table+table,table+p,p+table,ol+p,p+ol{margin-top:12px}
-
-/* intelligenza artificiale */
-.two{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin-top:14px}
-.box{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--soft)}
-.box h3{margin:0 0 6px}
-.box.no{border-left:5px solid var(--acc)}
-.slogan{font-size:21px;line-height:1.3;font-weight:800;text-align:center;margin-top:18px;color:var(--tx)}
-table{border-collapse:collapse;width:100%;font-size:15px}
-caption{text-align:left;font-size:15px;padding-bottom:8px}
-th,td{text-align:left;padding:8px 10px;border:1px solid var(--line);vertical-align:top}
-th,td{overflow-wrap:anywhere}
-th{background:var(--soft)}
+.manual{text-align:center}
+.manual .btn{margin:22px auto 0}
+.sources{margin-top:34px;text-align:left;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+.sources summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:10px 18px;font-weight:700;font-size:18px;cursor:pointer;list-style:none}
+.sources summary::-webkit-details-marker{display:none}
+.sources summary::after{content:"";flex:none;width:11px;height:11px;border-right:3px solid var(--acc);border-bottom:3px solid var(--acc);transform:rotate(45deg);margin:-4px 4px 0 0}
+.sources[open] summary::after{transform:rotate(225deg);margin-top:4px}
+.sources .in{padding:0 18px 18px;font-size:16px;line-height:1.5}
+.sources dl{display:grid;gap:0}
+.sources dl>div{padding:10px 0;border-top:1px solid var(--line)}
+.sources dt{font-weight:700}
+.sources dd{line-height:1.9}
+.sources .small{margin-top:12px}
 
 /* piè di pagina */
-footer{max-width:720px;margin:0 auto;padding:6px 16px 36px;text-align:center;color:var(--mut);font-size:14px}
+footer{max-width:720px;margin:0 auto;padding:42px 18px 40px;text-align:center;color:var(--mut);font-size:15px}
 footer p+p{margin-top:8px}
-footer .links{display:flex;flex-wrap:wrap;justify-content:center;gap:0 22px;margin-top:0}
+footer .links{display:flex;flex-wrap:wrap;justify-content:center;gap:0 22px}
 footer a{display:inline-block;padding:12px 0}
 footer .attr span{display:block}
 footer .attr .sep{display:none}
 
 @media (min-width:640px){
   main{padding-top:28px}
+  h3{font-size:22px}
+  .wall{padding:44px 40px 60px}
+  .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .cards li{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center;padding:24px 16px 22px}
+  .cards .pic{width:112px;height:112px}
+  .flow{grid-template-columns:repeat(3,minmax(0,1fr));gap:30px}
+  .flow li:not(:last-child)::after{left:auto;right:-26px;bottom:auto;top:76px;margin:0;transform:rotate(-45deg)}
+  .flow .pic{width:150px;height:150px}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .who{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .answers{grid-template-columns:repeat(2,minmax(0,1fr))}
   footer .attr span,footer .attr .sep{display:inline}
-  .card{padding:28px 28px}
-  h2{font-size:27px}
-  .flow{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .two{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
-  .step.has-shot{grid-template-columns:minmax(0,1fr) 280px;gap:28px;align-items:start}
-  .step.has-shot .shot,.split .shot{margin:0;justify-self:end}
-  .step.has-shot .text{padding-top:2px}
-  .split .shot{margin-top:4px}
-  .split{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:28px;align-items:start}
 }
-/* schermi molto stretti o zoom al 200%: niente testo che esce dallo schermo */
-@media (max-width:259px){.nw{white-space:normal;overflow-wrap:anywhere} th,td{padding:6px 5px}}
+@media (max-width:359px){
+  .colors li{grid-template-columns:62px minmax(0,1fr);gap:12px}
+  .chip{font-size:26px}
+  .strip b{font-size:14px;padding:10px 0}
+  .reader{grid-template-columns:minmax(0,1fr)}
+  .reader .pic{margin:0 auto}
+}
 /* stampa: i browser non stampano gli sfondi, quindi niente testo chiaro su fondo scuro */
 @media print{
-  :root{--bg:#fff;--card:#fff;--tx:#000;--mut:#333;--line:#999;--acc:#000;--acc-tx:#000;--link:#000;--btn:#fff;--soft:#fff;--frame:#999}
-  .chip,.msg,.logo{background:#fff!important;color:#000!important;border:1px solid #000}
+  :root{--bg:#fff;--card:#fff;--tx:#000;--mut:#333;--line:#999;--link:#000;--btn:#fff;--btn-tx:#000;--soft:#fff;--wall:#fff;--wall2:#fff;--base:#fff}
+  body{font-size:12pt}
+  .wall{background:none}.wall::after{display:none}
+  .panel{box-shadow:none;border-color:#000}
+  .chip,.logo{background:#fff!important;color:#000!important;border:1px solid #000;text-shadow:none}
   .btn{border:2px solid #000;box-shadow:none}
-  .flow .n{border:1px solid #000}
-  .ticks li::before{background:none;border:2px solid #000}
-  .card,figure,.step,.box,table{break-inside:avoid}
+  .strip b,.badge,.steps li::before,.legend li::before{border:1px solid #000;background:#fff!important;color:#000!important}
+  .jump{display:none}
+  .cards li,.colors li,.steps li,.flow li,.faq>div,.example,figure,.notice,.ans{break-inside:avoid}
 }
 </style>
 </head>
@@ -160,368 +274,243 @@ footer .attr .sep{display:none}
 <main>
 
 <header class="hero">
-  <div class="brand"><span class="logo" aria-hidden="true">PALINA</span><span class="tag">guida online</span></div>
-  <h1>Come funziona la PalAIna</h1>
-  <p class="lead">Un pannello a LED con gli arrivi degli autobus alle fermate che scegli, da tenere in casa vicino alla porta: guardi e sai subito se è il momento di uscire.</p>
-  <p class="lead sub">La palina del bus con l’intelligenza artificiale. Ti avvisa anche se oggi il bus salta la tua fermata per lavori, cortei o scioperi.</p>
-  <a class="btn" href="PalAIna_Manuale.pdf" download type="application/pdf">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>
-    <span>Scarica il manuale <span class="nw">(PDF, 1,0 MB)</span></span>
-  </a>
-  <p class="btn-note">Il manuale d’uso completo, in italiano.</p>
+  <div class="brand"><span class="logo" aria-hidden="true">PALINA</span><span class="tag">guida per tutti</span></div>
+  <h1>La palina che ti dice quando uscire di casa</h1>
+  <p class="lead">Un piccolo tabellone luminoso, come quello della fermata, ma in casa tua.</p>
+
+  <figure class="wall">
+    <div class="panel">
+      <!-- sostituire con una foto del pannello acceso -->
+      <img src="img/display_fiera_ferm.png" width="640" height="320"
+           alt="Il pannello acceso, con tre righe bianche: il numero dell’autobus, quante fermate mancano e fra quanti minuti arriva (13, 16 e 20 minuti).">
+    </div>
+    <figcaption class="wall-cap">Il pannello acceso: tre autobus in arrivo.</figcaption>
+  </figure>
+
   <nav class="jump" aria-label="Vai a">
     <span class="jump-label">Vai a</span>
-    <a href="#display">Come si legge il display</a>
-    <a href="#configurazione">Configurazione</a>
-    <a href="#alexa">Alexa</a>
-    <a href="#problemi">Se qualcosa non va</a>
-    <a href="#manuale">Manuale PDF</a>
+    <a href="#come-si-legge">Come si legge</a>
+    <a href="#come-si-mette">Per iniziare</a>
+    <a href="#domande">Domande</a>
+    <a class="pdf" href="PalAIna_Manuale.pdf" download type="application/pdf">Manuale PDF</a>
   </nav>
 </header>
 
-<section class="card" id="cosa-fa" aria-labelledby="h-cosa-fa">
-  <h2 id="h-cosa-fa">Cosa fa la PalAIna</h2>
-  <p>La PalAIna è un pannello a LED che mostra gli arrivi degli autobus alle fermate che scegli, come le paline elettroniche per strada. Dice:</p>
-  <ul class="ticks">
-    <li><strong>Fra quanti minuti passa il bus</strong> alla tua fermata. Ogni bus di Roma dice dove si trova, quindi i ritardi sono già contati.</li>
-    <li><strong>Quante fermate mancano</strong> prima che il bus arrivi da te.</li>
-    <li><strong>L’orario stampato</strong>, quando il bus non è ancora partito dal capolinea.</li>
-    <li><strong>Il bus giusto per dove vai</strong>: gli dici «lavoro» o «scuola» e ti dice quale linea ti porta prima.</li>
-    <li><strong>Bus + treno</strong> (in prova): se cambi in stazione, ti dice se fai in tempo a prendere il treno.</li>
-    <li><strong>Lavori, cortei, deviazioni</strong>: un’intelligenza artificiale legge gli avvisi del Comune e ti avvisa solo se riguardano la tua fermata.</li>
-    <li><strong>Scioperi</strong> di oggi e dei prossimi giorni.</li>
-    <li><strong>Maltempo</strong>: pioggia forte, temporali o neve in arrivo.</li>
-    <li><strong>Viola quando è ora di uscire, rosso se non fai più in tempo</strong>: sa quanti minuti ti servono a piedi fino alla fermata.</li>
-    <li><strong>Profili</strong>: più gruppi di fermate (casa, nonna, lavoro), e cambi con un tocco.</li>
-    <li><strong>Comandi a voce con Alexa</strong> (facoltativo): accendi e spegni la palina e cambi profilo parlando. <a href="#alexa">Come si fa</a>.</li>
+<section class="band" id="che-cose" aria-labelledby="h-che-cose">
+  <h2 id="h-che-cose">Che cos’è la PalAIna</h2>
+  <p class="intro lead">È un pannello con tanti puntini luminosi, da tenere in casa vicino alla porta. Ti basta uno sguardo.</p>
+  <ul class="cards">
+    <li>
+      <div class="pic"><svg class="il" viewBox="0 0 120 120" role="img" aria-label="Un autobus con un orologio"><circle class="bg" cx="60" cy="60" r="57"/><rect class="am ln" x="12" y="50" width="82" height="40" rx="9"/><rect class="pp ln th" x="19" y="57" width="15" height="14" rx="3"/><rect class="pp ln th" x="39" y="57" width="15" height="14" rx="3"/><rect class="pp ln th" x="59" y="57" width="15" height="14" rx="3"/><rect class="pp ln th" x="79" y="57" width="10" height="22" rx="3"/><path class="ln th" d="M12 80h82"/><circle class="dk ln" cx="32" cy="92" r="9"/><circle class="pp" cx="32" cy="92" r="3"/><circle class="dk ln" cx="75" cy="92" r="9"/><circle class="pp" cx="75" cy="92" r="3"/><circle class="pp ln" cx="88" cy="32" r="21"/><path class="ln th" d="M88 32V19M88 32l9 5"/></svg></div>
+      <div><h3>Ti dice fra quanti minuti passa il tuo bus</h3><p>Il numero grande è il tempo che manca.</p></div>
+    </li>
+    <li>
+      <div class="pic"><svg class="il" viewBox="0 0 120 120" role="img" aria-label="Una persona che esce di corsa da una porta"><circle class="bg" cx="60" cy="60" r="57"/><rect class="dk ln" x="12" y="22" width="34" height="70" rx="4"/><path class="am ln" d="M46 22l14 7v56l-14 7z"/><circle class="dk" cx="55" cy="58" r="2.2"/><path class="ln th" d="M8 94h104"/><circle class="pp ln" cx="88" cy="36" r="8"/><path class="ln fig" d="M85 47l-7 20M82 55l-13 4M82 55l12 8M78 67l-9 17h-9M78 67l11 11 2 14"/></svg></div>
+      <div><h3>Ti dice se è il momento di uscire</h3><p>I numeri cambiano colore: capisci subito se devi muoverti.</p></div>
+    </li>
+    <li>
+      <div class="pic"><svg class="il" viewBox="0 0 120 120" role="img" aria-label="Un cartello di avviso triangolare"><circle class="bg" cx="60" cy="60" r="57"/><path class="am ln" style="stroke-width:5" d="M60 20L102 94H18Z"/><rect class="dk nl" x="56" y="45" width="8" height="28" rx="4"/><circle class="dk nl" cx="60" cy="83" r="4.8"/></svg></div>
+      <div><h3>Ti avvisa se ci sono scioperi, lavori o deviazioni</h3><p>Così non aspetti un bus che oggi non passa.</p></div>
+    </li>
   </ul>
 </section>
 
-<section class="card" id="in-breve" aria-labelledby="h-in-breve">
-  <h2 id="h-in-breve">Come funziona, in breve</h2>
-  <p>Il pannello non fa i conti da solo. Un nostro computer su internet legge ogni pochi secondi i dati pubblici di Roma (dove sono i bus, gli orari, gli avvisi), fa i calcoli per la tua fermata e manda al pannello solo le righe da mostrare. Per questo consuma pochissimo internet: basta anche quello del telefono.</p>
-  <ol class="flow">
-    <li><b><span class="n">1</span>Dati aperti</b>Roma pubblica posizione dei bus, orari e avvisi; Trenitalia i treni; Open-Meteo il meteo.</li>
-    <li><b><span class="n">2</span>Server</b>Calcola i minuti, sceglie la linea migliore e fa leggere gli avvisi all’intelligenza artificiale.</li>
-    <li><b><span class="n">3</span>PalAIna</b>Riceve le righe da mostrare e le disegna sul pannello.</li>
+<section class="band" id="come-si-legge" aria-labelledby="h-legge">
+  <h2 id="h-legge">Come si legge il pannello</h2>
+  <p class="intro lead">Ogni riga è un autobus. Guarda queste tre parti.</p>
+
+  <figure class="annot">
+    <div class="panel">
+      <div class="ai">
+        <img src="img/display_fiera_dest.png" width="640" height="320" loading="lazy"
+             alt="Il pannello con tre righe, una per autobus. Evidenziate tre colonne: a sinistra il numero della linea, al centro dove va, a destra i minuti che mancano.">
+        <span class="col c1" aria-hidden="true"></span><span class="col c2" aria-hidden="true"></span><span class="col c3" aria-hidden="true"></span>
+        <span class="badge b1" aria-hidden="true">1</span><span class="badge b2" aria-hidden="true">2</span><span class="badge b3" aria-hidden="true">3</span>
+      </div>
+    </div>
+  </figure>
+  <ol class="legend">
+    <li><div><strong>Il numero del bus</strong><span>Qui, per esempio, il 23.</span></div></li>
+    <li><div><strong>Dove va</strong><span>Il nome dell’ultima fermata. Ogni tanto, al suo posto, compare quante fermate mancano.</span></div></li>
+    <li><div><strong>Fra quanti minuti arriva</strong><span>Qui: 9 minuti. Se vedi <strong class="nw ora">ORA</strong> che lampeggia, il bus sta arrivando adesso.</span></div></li>
   </ol>
-</section>
 
-<section class="card" id="display" aria-labelledby="h-display">
-  <h2 id="h-display">Come si legge il display</h2>
-  <img class="led" src="img/display_arrivi.png" width="640" height="320" loading="lazy"
-       alt="Il display con la scritta ARRIVI e tre righe bianche: linea, capolinea e minuti all’arrivo (10, 16 e 23).">
-  <dl class="rows" style="margin-top:14px">
-    <div><dt>In alto: ARRIVI</dt><dd>Fisso. Ogni tanto lascia scorrere un messaggio. I puntini a destra indicano che ci sono più pagine di arrivi.</dd></div>
-    <div><dt>Riga: numero a sinistra</dt><dd>La linea (44, 773, 719…).</dd></div>
-    <div><dt>Riga: centro</dt><dd>A turno ogni 6 secondi: le <strong>fermate mancanti</strong> (<em>7 Ferm.</em>) e il <strong>capolinea</strong>, che scorre per intero e dice la direzione.</dd></div>
-    <div><dt>Riga: a destra</dt><dd>I <strong>minuti</strong> all’arrivo (<em>7'</em>). <strong>ORA</strong> lampeggiante: sta arrivando adesso.</dd></div>
-    <div><dt>In basso</dt><dd>Data e ora, quando c’è spazio libero.</dd></div>
-  </dl>
-
-  <h3>I colori</h3>
+  <div class="sub"><div class="tl"><svg class="il" viewBox="0 0 40 72" aria-hidden="true"><rect class="dk ln" x="3" y="3" width="34" height="66" rx="11"/><circle class="wh" cx="20" cy="19" r="8.5"/><circle class="vi" cx="20" cy="36" r="8.5"/><circle class="rd" cx="20" cy="53" r="8.5"/></svg></div><h3>I colori, come un semaforo</h3></div>
+  <p class="mut">I minuti cambiano colore, per dirti cosa fare.</p>
   <ul class="colors">
-    <li><span class="chip c-w" aria-hidden="true">7'</span><div><strong>Bianco</strong>: <strong>previsione in tempo reale</strong>. Il bus è in strada e Roma ne stima il passaggio dalla sua posizione.</div></li>
-    <li><span class="chip c-o" aria-hidden="true">7'</span><div><strong>Arancione</strong>: orario <strong>stampato</strong>. Il bus non è ancora partito. Queste righe restano sempre arancioni, mai viola o rosse: non sappiamo se il bus passerà davvero, quindi il pannello non ti fa correre.</div></li>
-    <li><span class="chip c-v" aria-hidden="true">7'</span><div><strong>Viola</strong>: <strong>esci adesso</strong>. Camminando ce la fai ancora, ma fra tre minuti non più.</div></li>
-    <li><span class="chip c-r" aria-hidden="true">4'</span><div><strong>Rosso</strong>: a piedi <strong>non fai più in tempo</strong> a prenderlo.</div></li>
+    <li><span class="chip cw" aria-hidden="true">7’</span><div><strong>Bianco</strong><span>Il bus sta arrivando davvero.</span></div></li>
+    <li><span class="chip cv" aria-hidden="true">7’</span><div><strong>Viola</strong><span>Esci adesso! Se cammini ce la fai.</span></div></li>
+    <li><span class="chip cr" aria-hidden="true">4’</span><div><strong>Rosso</strong><span>Ormai non fai più in tempo.</span></div></li>
+    <li class="apart"><span class="chip co" aria-hidden="true">7’</span><div><strong>Arancione</strong><span>È l’orario scritto sulla tabella. Non sappiamo ancora dov’è il bus: non correre.</span></div></li>
   </ul>
-  <p class="note"><strong>Esempio: ti servono 6 minuti a piedi.</strong> Un bus a 8, 7 o 6 minuti è viola: esci adesso. Da 5 minuti in giù diventa rosso: camminando non lo prendi più. Vale solo per i bus già per strada (righe bianche).</p>
 
-  <figure class="ledfig">
-    <img class="led" src="img/display_orario.png" width="640" height="320" loading="lazy"
-         alt="Il display con tre righe arancioni: la linea 44 in arrivo fra 23, 45 e 67 minuti.">
-    <figcaption>Esempio con orari stampati (arancione): a quell’ora nessun 44 era ancora partito.</figcaption>
+  <figure class="orange-fig">
+    <div class="panel">
+      <img src="img/display_orario.png" width="640" height="320" loading="lazy"
+           alt="Il pannello con tre righe arancioni: la linea 44 in arrivo fra 23, 45 e 67 minuti.">
+    </div>
+    <figcaption>Righe arancioni: sono orari scritti, il bus non è ancora partito.</figcaption>
   </figure>
 
-  <h3>I messaggi che scorrono</h3>
-  <dl class="rows">
-    <div><dt><span class="msg">! 44 NON FERMA QUI</span></dt><dd>Un avviso dice che la 44 oggi <strong>salta la tua fermata</strong>: la linea sparisce anche dagli arrivi.</dd></div>
-    <div><dt><span class="msg">AI: 871 NON FERMA QUI</span></dt><dd>L’informazione viene da una notizia di infomobilità letta dall’intelligenza artificiale.</dd></div>
-    <div><dt><span class="msg">INFO: PIOGGIA FORTE DALLE 17 - POSSIBILI RITARDI</span></dt><dd>Una volta al minuto, in basso: la previsione del meteo delle prossime 12 ore. Se non c’è niente da segnalare non compare mai.</dd></div>
-  </dl>
-</section>
-
-<section class="card" id="configurazione" aria-labelledby="h-configurazione">
-  <h2 id="h-configurazione">Configurazione in 4 passi, dal telefono</h2>
-  <p>Serve solo un telefono, per la prima volta. Non c’è nessuna app da scaricare.</p>
-
-  <article class="step">
-    <div class="text">
-      <p class="kicker">Prima: passo 0</p>
-      <h3>Accendi la palina</h3>
-      <p>Al primo avvio la palina crea una sua rete WiFi e mostra sul display <strong>CONFIGURA</strong>, il nome della rete (per esempio <strong class="nw">PALINA-87A4</strong>), la password di 8 caratteri (per esempio <strong class="nw">NACRG456</strong>) e <strong class="nw">APRI 192.168.4.1</strong>.</p>
-      <p>Sul telefono apri le impostazioni WiFi, scegli la rete <strong class="nw">PALINA-…</strong> e scrivi la password letta sul display. La pagina di configurazione si apre da sola; se non succede, apri il browser e scrivi <strong class="nw">192.168.4.1</strong>.</p>
+  <div class="example">
+    <h4>Un esempio</h4>
+    <p>Da casa tua alla fermata ci vogliono <strong>6 minuti a piedi</strong>. Ecco i colori di un bus, a seconda dei minuti che mancano:</p>
+    <div class="strip" role="img" aria-label="Con 6 minuti a piedi: a 11, 10 e 9 minuti il bus è bianco; a 8, 7 e 6 minuti è viola; a 5, 4, 3, 2 e 1 minuti è rosso.">
+      <b aria-hidden="true">11</b><b aria-hidden="true">10</b><b aria-hidden="true">9</b><b class="v" aria-hidden="true">8</b><b class="v" aria-hidden="true">7</b><b class="v" aria-hidden="true">6</b><b class="r" aria-hidden="true">5</b><b class="r" aria-hidden="true">4</b><b class="r" aria-hidden="true">3</b><b class="r" aria-hidden="true">2</b><b class="r" aria-hidden="true">1</b>
+      <i aria-hidden="true">c’è tempo</i><i aria-hidden="true">esci adesso</i><i aria-hidden="true">troppo tardi</i>
     </div>
-    <img class="led" style="margin-top:0" src="img/display_configura.png" width="640" height="320" loading="lazy"
-         alt="Il display in configurazione: la scritta CONFIGURA, il nome della rete, la password e APRI 192.168.4.1.">
-  </article>
-
-  <article class="step has-shot">
-    <div class="text">
-      <p class="kicker">Passo 1</p>
-      <h3>WiFi di casa</h3>
-      <p>Scegli la rete di casa dall’elenco, scrivi la sua password e tocca <strong>Collega</strong>. In pochi secondi la pagina conferma <strong>Collegato!</strong> e passa al passo successivo.</p>
-      <p><strong>Non ricordi la password?</strong> Se il router ha il tasto <strong>WPS</strong>, apri la voce «Non ricordi la password?», tocca <strong>Collega senza password (WPS)</strong> e poi, entro due minuti, premi il tasto WPS sul router. Il display mostra «PREMI WPS SUL ROUTER».</p>
-      <p class="small">Mentre la palina si collega, il telefono può staccarsi per un attimo dalla rete PALINA: ricollegati e la pagina prosegue.</p>
-      <p class="small">Più avanti, per cambiare rete o aggiungerne una, tieni premuto <strong>DOWN</strong> per 5 secondi: <a href="#rete">come si fa</a>.</p>
-    </div>
-    <figure class="shot"><img src="img/wifi.webp" width="780" height="1601" loading="lazy" style="--ar:780/1545"
-      alt="Passo 1: la pagina «WiFi di casa» con l’elenco delle reti, la password e il pulsante Collega."></figure>
-  </article>
-
-  <article class="step has-shot">
-    <div class="text">
-      <p class="kicker">Passo 2</p>
-      <h3>Casa e fermate</h3>
-      <p>Scrivi il tuo indirizzo e tocca <strong>Cerca</strong>. Compaiono le fermate entro 500 metri, con le linee che ci passano e la loro direzione.</p>
-      <ul class="ticks">
-        <li>Spunta fino a <strong>4 fermate</strong>.</li>
-        <li>Due fermate con lo stesso nome sono i <strong>due lati della strada</strong>, uno per verso: scegli quello della direzione che ti serve.</li>
-        <li>I <strong>minuti a piedi</strong> sono calcolati sul percorso vero (marciapiedi e attraversamenti, con OpenStreetMap). Correggili se cammini più veloce o più piano: servono a colorare di rosso i bus che non faresti in tempo a prendere.</li>
-      </ul>
-    </div>
-    <figure class="shot"><img src="img/fermate.webp" width="780" height="1601" loading="lazy" style="--ar:780/1465"
-      alt="Passo 2: la pagina «Casa e fermate» con le fermate trovate vicino all’indirizzo, le linee che ci passano e i minuti a piedi."></figure>
-  </article>
-
-  <article class="step has-shot">
-    <div class="text">
-      <p class="kicker">Passo 3 · facoltativo</p>
-      <h3>Dove vai</h3>
-      <p>Indica fino a due destinazioni abituali, per esempio <strong>LAVORO</strong> e <strong>SCUOLA</strong>. Per ognuna puoi:</p>
-      <ul class="ticks">
-        <li>scrivere un <strong>indirizzo</strong>, oppure</li>
-        <li>toccare <strong>«oppure scegli la fermata sulla linea»</strong>: scegli la linea e poi la fermata dove scendi, fra quelle che la linea tocca davvero dopo la tua.</li>
-      </ul>
-      <p>La palina ti dirà quale linea ti fa arrivare prima, ritardi compresi.</p>
-    </div>
-    <figure class="shot"><img src="img/destinazione.webp" width="780" height="1601" loading="lazy" style="--ar:780/1570"
-      alt="Passo 3: la pagina «Dove vai» con la scelta della linea e della fermata dove scendi."></figure>
-  </article>
-
-  <article class="step has-shot">
-    <div class="text">
-      <p class="kicker">Passo 4</p>
-      <h3>Display</h3>
-      <ul class="ticks">
-        <li><strong>Luminosità di giorno e di notte</strong>, e le ore della notte (di serie dalle 22 alle 7).</li>
-        <li><strong>Viola e rosso</strong>: viola quando è ora di uscire, rosso se a piedi non fai più in tempo. Attivo di serie.</li>
-        <li><strong>Controllo con Alexa</strong>: facoltativo e spento di serie. Più sotto nella pagina; come si usa è <a href="#alexa">qui sotto</a>.</li>
-        <li>In <strong>Avanzate</strong> c’è l’indirizzo del server: non va toccato.</li>
-      </ul>
-      <p>Tocca <strong>Salva</strong>: la palina si riavvia e dopo qualche secondo mostra gli arrivi. La rete PALINA si spegne da sola.</p>
-    </div>
-    <figure class="shot"><img src="img/display.webp" width="780" height="872" loading="lazy" style="--ar:780/872"
-      alt="Passo 4: la pagina «Display» con la luminosità di giorno e di notte e le ore della notte."></figure>
-  </article>
-</section>
-
-<section class="card" id="rete" aria-labelledby="h-rete">
-  <h2 id="h-rete">Cambiare rete WiFi o usare l’hotspot</h2>
-  <p>La palina ricorda fino a <strong>4 reti</strong> e all’accensione si collega a quella che trova con il segnale migliore: puoi portarla in un’altra casa, o usarla con l’hotspot del telefono, senza ricominciare da capo.</p>
-
-  <h3>Il modo più semplice: tieni premuto DOWN per 5 secondi</h3>
-  <ol class="how">
-    <li>Sul retro del pannello, tieni premuto il tasto <strong>DOWN</strong> per <strong>5 secondi</strong>. Il display scrive <strong>CONFIGURA</strong>, il nome della rete <strong class="nw">PALINA-…</strong> e la password. Funziona anche se la rete di casa è vicina, e anche a pannello spento.</li>
-    <li>Sul telefono collegati alla rete <strong class="nw">PALINA-…</strong> con quella password. La pagina si apre da sola e parte dal passo 1, <strong>WiFi di casa</strong>.</li>
-    <li>Scegli la rete, scrivi la password e tocca <strong>Collega</strong>. La palina ricorda la rete e si riavvia da sola: fermate e impostazioni restano. La pagina sul telefono può restare ferma: guarda il pannello.</li>
-  </ol>
-  <p class="note"><strong>Quando finisce.</strong> In questo modo la palina non si ricollega da sola alle reti che conosce: aspetta te. Si riavvia appena colleghi una rete, oppure <strong>dopo 10 minuti</strong> se nessuno ha fatto niente, e torna normale. Ci hai ripensato? Nel passo 1 tocca <strong>Annulla e riavvia la palina</strong> (compare se la palina è già configurata) e conferma: si riavvia e torna tutto come prima, con reti e fermate salvate. In alternativa tieni premuto <strong>UP</strong> per 5 secondi (riavvia la palina). Se il pannello era spento, dopo il riavvio torna spento: tocca UP.</p>
-
-  <h3>Preparare l’hotspot del telefono (per le fiere e le dimostrazioni)</h3>
-  <p>Se in fiera non c’è il WiFi di casa, la palina può collegarsi al telefono usato come hotspot. Si prepara una volta sola, meglio a casa:</p>
-  <ol class="how">
-    <li>Imposta l’hotspot a <strong class="nw">2,4 GHz</strong>: la palina non vede il <span class="nw">5 GHz</span>. Su <strong>iPhone</strong> attiva <strong>Massimizza compatibilità</strong> (Impostazioni → Hotspot personale); su <strong>Android</strong> scegli la banda <strong class="nw">2,4 GHz</strong> nelle impostazioni dell’hotspot WiFi.</li>
-    <li>Dai all’hotspot una password semplice: almeno 8 caratteri, solo lettere e numeri, e un nome senza accenti.</li>
-    <li>Tieni acceso l’hotspot e tieni premuto <strong>DOWN</strong> sulla palina per 5 secondi.</li>
-    <li>Con un <strong>altro</strong> telefono o un computer, collegati a <strong class="nw">PALINA-…</strong>, scegli il nome dell’hotspot nel passo 1 e scrivi la sua password. Con lo stesso telefono non va: collegandoti a PALINA, il telefono spegne l’hotspot.</li>
-  </ol>
-  <p class="note"><strong>Il giorno della fiera.</strong> Accendi l’hotspot <strong>prima</strong> di dare corrente alla palina: si collega da sola. Se lo accendi dopo, la palina mostra CONFIGURA e riprova ogni mezzo minuto: appena lo trova si collega e si riavvia, senza toccare niente.</p>
-</section>
-
-<section class="card" id="profili" aria-labelledby="h-profili">
-  <h2 id="h-profili">Profili: casa, nonna, lavoro</h2>
-  <div class="split">
-    <div>
-      <p>Un <strong>profilo</strong> è un gruppo di fermate con un nome. Esempio: il profilo <strong>CASA</strong> mostra la fermata sotto casa, il profilo <strong>NONNA</strong> quella vicino alla nonna. Puoi averne fino a 4.</p>
-      <p>Ogni profilo ricorda le fermate, i minuti a piedi, l’indirizzo e le destinazioni. Luminosità e WiFi invece sono uguali per tutti.</p>
-      <h3>Cambiare profilo</h3>
-      <ul class="ticks">
-        <li><strong>Dal pannello</strong>: un tocco breve sul tasto <strong>UP</strong>, sulla scheda di controllo, sul retro del pannello. Il pannello scrive il nome del profilo, per esempio <strong>NONNA</strong>, e dopo un attimo mostra i suoi bus. Con un solo profilo il tasto non fa niente.</li>
-        <li><strong>Dal telefono</strong>: apri la pagina della palina (scrivi <strong class="mono">palina.local</strong> nel browser, con il telefono sullo stesso WiFi della palina) e tocca il nome del profilo. Quello acceso ha il bordo arancione. Se la pagina non si apre, vedi <a href="#problemi">Se qualcosa non va</a>.</li>
-      </ul>
-      <p>Per crearne uno nuovo tocca <strong>+ Nuovo</strong>, scrivi un nome (per esempio LAVORO) e scegli le sue fermate con <strong>Cambia fermate</strong>.</p>
-    </div>
-    <figure class="shot"><img src="img/riepilogo.webp" width="780" height="1601" loading="lazy" style="--ar:780/1515"
-      alt="La pagina «La tua palina» con i profili CASA e NONNA, le fermate scelte e i pulsanti per cambiarle."></figure>
+    <p>Un bus a 8, 7 o 6 minuti è viola: esci adesso. Da 5 minuti in giù è rosso: a piedi non lo prendi più.</p>
+    <p class="small">I minuti a piedi li scegli tu quando prepari la palina. Il viola e il rosso valgono solo per i bus già per strada, non per l’arancione.</p>
   </div>
 </section>
 
-<section class="card" id="diretta" aria-labelledby="h-diretta">
-  <h2 id="h-diretta">Il display in diretta</h2>
-  <div class="split">
-    <p>All’indirizzo <strong class="mono">palina.local/live</strong> vedi sul telefono o sul computer la stessa immagine del pannello, a punti, aggiornata quattro volte al secondo. È comodo per controllare la palina da un’altra stanza o per mostrarla in una presentazione. Il telefono deve essere sullo stesso WiFi della palina. Se non si apre, vedi <a href="#problemi">Se qualcosa non va</a>.</p>
-    <figure class="shot dark"><img src="img/live.webp" width="780" height="835" loading="lazy" style="--ar:780/565"
-      alt="La pagina del display in diretta: la stessa immagine a punti del pannello."></figure>
-  </div>
-</section>
-
-<section class="card" id="alexa" aria-labelledby="h-alexa">
-  <h2 id="h-alexa">Comandi a voce con Alexa</h2>
-  <div class="split">
-    <div>
-      <p>Facoltativo. Se a casa hai un Echo (o un altro altoparlante con Alexa), puoi accendere e spegnere la palina e cambiare profilo con la voce. La palina si presenta ad Alexa come una lampadina intelligente di nome <strong>Palina</strong>. Non serve collegare nessun account e non c’è niente da scaricare: funziona solo dentro casa, sulla rete WiFi.</p>
-      <h3>Attivarla, una volta sola</h3>
-      <ul class="ticks">
-        <li>Apri <strong class="mono">palina.local</strong>, tocca <strong>Display</strong>, spunta <strong>Controllo con Alexa</strong> e tocca <strong>Salva</strong>. La palina si riavvia. Di serie è spento.</li>
-        <li>Di’ <strong>«Alexa, scopri i dispositivi»</strong>. Alexa cerca per circa 45 secondi e trova <strong>Palina</strong>. Basta la prima volta.</li>
-      </ul>
-      <p class="small">Sotto la casella la pagina scrive da sola cosa dire, con le percentuali giuste per i tuoi profili.</p>
-    </div>
-    <figure class="shot"><img src="img/alexa.webp" width="780" height="1360" loading="lazy" style="--ar:780/1360"
-      alt="La pagina «Display» con la casella «Controllo con Alexa» spuntata, i comandi da dire e le routine per i profili."></figure>
-  </div>
-
-  <h3>Cosa dire</h3>
-  <table>
-    <thead><tr><th scope="col">Comando</th><th scope="col">Cosa succede</th></tr></thead>
-    <tbody>
-      <tr><td class="say">«Alexa, accendi palina»</td><td>Il pannello si accende, con il profilo di prima.</td></tr>
-      <tr><td class="say">«Alexa, spegni palina»</td><td>Il pannello diventa nero. Resta spento anche se manca la corrente.</td></tr>
-      <tr><td class="say">«Alexa, imposta palina al 50 per cento»</td><td>Sceglie il profilo che corrisponde a quella percentuale (tabelle qui sotto) e accende il pannello, anche se era spento.</td></tr>
-    </tbody>
-  </table>
-
-  <h3>Il profilo sceglie la percentuale</h3>
-  <p>Alexa vede la palina come una lampadina e il profilo si sceglie con la <strong>luminosità</strong>: nell’app Alexa la barra della luminosità è la scelta del profilo. Ogni profilo copre un tratto di percentuali, dal primo all’ultimo.</p>
-  <table>
-    <thead><tr><th scope="col">Quanti profili hai</th><th scope="col">Ogni profilo arriva fino a (%)</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td>100</td></tr>
-      <tr><td>2</td><td>50 · 100</td></tr>
-      <tr><td>3</td><td>33 · 67 · 100</td></tr>
-      <tr><td>4</td><td>25 · 50 · 75 · 100</td></tr>
-    </tbody>
-  </table>
-  <table>
-    <caption><strong>Esempio con 3 profili.</strong></caption>
-    <thead><tr><th scope="col">Profilo e percentuali</th><th scope="col">Cosa dici</th></tr></thead>
-    <tbody>
-      <tr><td><strong>1° CASA</strong><br>da 1 a 33</td><td>«imposta palina al 30 per cento»</td></tr>
-      <tr><td><strong>2° NONNA</strong><br>da 34 a 67</td><td>«imposta palina al 60 per cento»</td></tr>
-      <tr><td><strong>3° LAVORO</strong><br>da 68 a 100</td><td>«imposta palina al 100 per cento»</td></tr>
-    </tbody>
-  </table>
-  <p class="small">Il nome del profilo non si può dire: Alexa non lo conosce. Per dire «palina nonna» servono le routine.</p>
-
-  <h3>Dire il nome del profilo: le routine</h3>
-  <p>Una routine è un comando di Alexa che tu inventi. Se ne crea una per profilo, una sola volta:</p>
-  <ol class="how">
-    <li>Nell’app Alexa tocca <strong>Altro → Routine → +</strong>.</li>
-    <li><strong>Quando</strong> → Voce → scrivi la frase: «palina» e il nome del profilo, per esempio «palina nonna».</li>
-    <li><strong>Azione</strong> → Smart Home → <strong>Palina</strong> → Luminosità → scegli la percentuale del profilo (per esempio 67%).</li>
-    <li>Tocca <strong>Salva</strong>, poi di’ la frase: la palina passa a quel profilo.</li>
+<section class="band" id="come-funziona" aria-labelledby="h-funziona">
+  <h2 id="h-funziona">Come funziona, in tre disegni</h2>
+  <ol class="flow">
+    <li>
+      <div class="pic"><svg class="il" viewBox="0 0 120 120" role="img" aria-label="Un autobus che manda un segnale radio"><circle class="bg" cx="60" cy="60" r="57"/><path class="ar" d="M50 52A10 10 0 0 1 70 52M40 52A20 20 0 0 1 80 52M30 52A30 30 0 0 1 90 52"/><circle class="am ln th" cx="60" cy="52" r="3.5"/><rect class="am ln" x="14" y="62" width="92" height="34" rx="8"/><rect class="pp ln th" x="21" y="68" width="14" height="12" rx="3"/><rect class="pp ln th" x="40" y="68" width="14" height="12" rx="3"/><rect class="pp ln th" x="59" y="68" width="14" height="12" rx="3"/><rect class="pp ln th" x="90" y="68" width="10" height="20" rx="3"/><path class="ln th" d="M14 86h92"/><circle class="dk ln" cx="34" cy="97" r="8"/><circle class="pp" cx="34" cy="97" r="2.6"/><circle class="dk ln" cx="82" cy="97" r="8"/><circle class="pp" cx="82" cy="97" r="2.6"/></svg></div>
+      <h3>I bus dicono dove sono</h3>
+      <p>Ogni autobus della città manda la sua posizione. La città pubblica questi dati per tutti, in modo aperto.</p>
+    </li>
+    <li>
+      <div class="pic"><svg class="il" viewBox="0 0 120 120" role="img" aria-label="Una nuvola e un computer che fa i conti"><circle class="bg" cx="60" cy="60" r="57"/><path class="pp ln" d="M34 56C21 56 17 43 28 39C28 27 44 22 52 31C58 21 76 25 77 37C91 37 93 56 79 56Z"/><rect class="dk ln" x="24" y="62" width="72" height="36" rx="5"/><path class="am nl" d="M42 74h14v4H42z M47 69h4v14h-4z M66 74h16v4H66z M66 86h16v4H66z"/><rect class="am ln" x="14" y="98" width="92" height="7" rx="3.5"/></svg></div>
+      <h3>Un computer fa i conti</h3>
+      <p>Sta su internet. Calcola fra quanti minuti ogni bus arriva alla tua fermata e legge gli avvisi.</p>
+    </li>
+    <li>
+      <div class="pic"><svg class="il" viewBox="0 0 120 120" role="img" aria-label="Una casa con il pannello della palina appeso al muro"><circle class="bg" cx="60" cy="60" r="57"/><rect class="pp ln" x="20" y="50" width="80" height="46" rx="3"/><path class="am ln" d="M12 53L60 18L108 53Z"/><rect class="am ln th" x="27" y="66" width="18" height="30" rx="2"/><circle class="dk" cx="41" cy="82" r="1.8"/><rect class="dk ln th" x="54" y="62" width="40" height="22" rx="3"/><path class="wh nl" d="M58 67h30v3H58z M58 73h22v3H58z"/><path class="og nl" d="M58 79h28v3H58z"/><path class="ln th" d="M8 97h104"/></svg></div>
+      <h3>La palina mostra solo ciò che ti serve</h3>
+      <p>Riceve poche righe già pronte e le accende sul pannello. Per questo usa pochissimo internet.</p>
+    </li>
   </ol>
-  <p class="small">La pagina della palina (Display, con la casella Alexa spuntata) elenca frase e percentuale di ogni profilo, pronte da copiare.</p>
-
-  <p class="note"><strong>Cose da sapere.</strong> Echo e palina devono stare sulla <strong>stessa rete WiFi di casa</strong>: con l’hotspot del telefono non funziona. Allo stand della Maker Faire il controllo con Alexa è spento. Se rinomini o riordini i profili, aggiorna le routine: la frase segue il nome e la percentuale segue la posizione. Se aggiungi o togli un profilo, le percentuali cambiano ma Alexa non va riconfigurata. Con Alexa attiva, chiunque sia sulla stessa rete WiFi può comandare la palina, come una lampadina intelligente. Se il pannello è nero, tocca UP sul retro.</p>
 </section>
 
-<section class="card" id="ai" aria-labelledby="h-ai">
-  <h2 id="h-ai">L’intelligenza artificiale: cosa fa e cosa no</h2>
-  <p>La PalAIna usa <strong>Jev</strong>, un modello di intelligenza artificiale di <strong>TypeSafe AI</strong>. Gli avvisi di Roma Mobilità sono scritti per le persone: «la linea 44 non transita in via Makallè, via Asmara e via Tripoli» non contiene nessun numero che un programma normale possa usare. Jev legge il testo e risponde a domande con risposta fissa:</p>
-  <ul class="ticks">
-    <li><strong>questa fermata è coinvolta?</strong> saltata, spostata, non coinvolta, non chiaro;</li>
-    <li><strong>di quale strada parla l’avviso?</strong> sceglie fra quelle citate;</li>
-    <li><strong>quando vale la notizia?</strong> in corso, più tardi oggi, nei prossimi giorni, passata.</li>
-  </ul>
+<section class="band" id="come-si-mette" aria-labelledby="h-mette">
+  <h2 id="h-mette">Come si mette in funzione</h2>
+  <p class="intro lead">Serve solo un telefono. Non c’è nessuna app da scaricare.</p>
+  <ol class="steps">
+    <li>
+      <div class="pic"><svg class="il" viewBox="0 0 120 120" role="img" aria-label="Una spina infilata in una presa di corrente"><circle class="bg" cx="60" cy="60" r="57"/><rect class="pp ln" x="60" y="18" width="50" height="84" rx="11"/><path class="am ln th" d="M88 26L77 45H86L82 60L97 40H88Z"/><path class="ln fig" style="stroke-width:7" d="M24 76h-9c-10 0-10 22 2 28"/><rect class="am ln th" x="62" y="66" width="20" height="6" rx="3"/><rect class="am ln th" x="62" y="82" width="20" height="6" rx="3"/><rect class="dk ln" x="22" y="58" width="44" height="36" rx="9"/><path class="dim nl" d="M32 68h24v4H32z"/></svg></div>
+      <h3>La attacchi alla corrente</h3>
+      <p>Il pannello si accende e scrive CONFIGURA.</p>
+    </li>
+    <li>
+      <div class="pic"><svg class="il" viewBox="0 0 120 120" role="img" aria-label="Un telefono che mostra l’elenco delle reti WiFi"><circle class="bg" cx="60" cy="60" r="57"/><rect class="pp ln" x="34" y="12" width="52" height="96" rx="10"/><rect class="dk" x="40" y="22" width="40" height="76" rx="4"/><path class="ar" style="stroke-width:3.5" d="M52 43A11 11 0 0 1 68 43M47 38A18 18 0 0 1 73 38"/><circle class="am" cx="60" cy="47" r="2.8"/><rect class="dim" x="45" y="58" width="30" height="10" rx="3"/><rect class="am" x="45" y="72" width="30" height="10" rx="3"/><rect class="dim" x="45" y="86" width="30" height="8" rx="3"/></svg></div>
+      <h3>Col telefono scegli la rete della palina</h3>
+      <p>Nelle impostazioni del WiFi scegli il nome che vedi sul pannello (comincia con PALINA) e scrivi la parola d’ordine mostrata lì.</p>
+    </li>
+    <li>
+      <div class="pic"><div class="shot"><img src="img/fermate.webp" width="780" height="1601" loading="lazy"
+        alt="La pagina sul telefono: l’indirizzo scritto in alto e sotto l’elenco delle fermate vicine, con le linee che ci passano."></div></div>
+      <h3>Scrivi dove abiti e scegli la tua fermata</h3>
+      <p>Scegli anche il WiFi di casa. Poi scrivi il tuo indirizzo: vedrai le fermate vicine e tocchi la tua.</p>
+    </li>
+    <li>
+      <div class="pic"><div class="panel">
+        <img src="img/display_fiera_ferm.png" width="640" height="320" loading="lazy"
+             alt="Il pannello con gli arrivi dei bus alla fermata scelta.">
+      </div></div>
+      <h3>Fatto: ecco gli arrivi</h3>
+      <p>Tocca Salva: dopo qualche secondo il pannello mostra i tuoi autobus.</p>
+    </li>
+  </ol>
+  <p class="more">Tutti i dettagli sono nel <a href="PalAIna_Manuale.pdf" download type="application/pdf">manuale</a>.</p>
+</section>
 
-  <table style="margin-top:16px">
-    <caption><strong>Esempio reale.</strong> Avviso: «La linea 44 non transita in via Makallè, via Asmara e via Tripoli».</caption>
-    <thead><tr><th scope="col">Fermata</th><th scope="col">Risposta</th></tr></thead>
-    <tbody>
-      <tr><td>ASMARA/TRIPOLI</td><td><strong>saltata</strong></td></tr>
-      <tr><td>LA TUA FERMATA</td><td><strong>non coinvolta</strong>: il pannello non ti disturba</td></tr>
-    </tbody>
-  </table>
+<section class="band" id="intelligenza" aria-labelledby="h-ai">
+  <h2 id="h-ai">L’intelligenza artificiale, a cosa serve</h2>
+  <p class="intro lead">Gli avvisi della città sono scritti per le persone, non per i computer. L’intelligenza artificiale li legge come farebbe una persona.</p>
 
-  <div class="two">
-    <div class="box">
-      <h3>Cosa fa l’AI</h3>
-      <p>Legge gli avvisi e le notizie di infomobilità e capisce se riguardano la tua fermata.</p>
-    </div>
-    <div class="box no">
-      <h3>Cosa l’AI non fa</h3>
-      <p>Minuti, ritardi, fermate mancanti, consigli sulla linea, calcolo del cambio col treno: sono tutti <strong>calcoli esatti</strong> sui dati ufficiali, fatti da un programma normale. Jev non scrive testi e non può inventare orari.</p>
-    </div>
+  <figure class="notice">
+    <p class="tag"><svg class="il" viewBox="0 0 40 40" aria-hidden="true"><path class="am ln" style="stroke-width:3" d="M20 5L37 33H3Z"/><rect class="dk nl" x="18.3" y="14" width="3.4" height="10" rx="1.7"/><circle class="dk nl" cx="20" cy="28" r="2"/></svg><span>Un avviso della città</span></p>
+    <blockquote>«La linea 44 non transita in via Makallè, via Asmara e via Tripoli.»</blockquote>
+    <p class="hint">«Non transita» vuol dire: non passa.</p>
+  </figure>
+  <span class="down" aria-hidden="true"></span>
+  <div class="reader">
+    <div class="pic"><svg class="il" viewBox="0 0 120 120" role="img" aria-label="Un foglio letto con una lente d’ingrandimento"><circle class="bg" cx="60" cy="60" r="57"/><rect class="pp ln" x="22" y="14" width="58" height="76" rx="6"/><path class="ln th" d="M32 30h38M32 42h30M32 54h38M32 66h20"/><circle class="pp ln" cx="76" cy="72" r="18"/><path class="ln fig" style="stroke-width:8" d="M89 85l15 15"/><path class="am nl" d="M64 70h24v5H64z"/><path class="am ln th" d="M96 16l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/></svg></div>
+    <p><strong>L’intelligenza artificiale lo legge</strong> e controlla se riguarda la tua fermata.</p>
+  </div>
+  <span class="down" aria-hidden="true"></span>
+  <div class="answers">
+    <div class="ans skip"><small>Fermata ASMARA/TRIPOLI</small><strong>Il 44 oggi non ferma qui.</strong></div>
+    <div class="ans fine"><small>La tua fermata</small><strong>Non cambia niente: il pannello non ti disturba.</strong></div>
+  </div>
+
+  <div class="who">
+    <div><h3>L’AI legge</h3><p>Capisce gli avvisi e dice se riguardano la tua fermata.</p></div>
+    <div><h3>Il computer calcola</h3><p>Minuti, ritardi e fermate che mancano sono conti esatti, fatti con i dati ufficiali.</p></div>
   </div>
   <p class="slogan">L’AI legge, la matematica calcola.</p>
-  <p class="small" style="margin-top:12px">Per ridurre gli errori ogni domanda viene posta tre volte e si tiene la risposta più frequente; la risposta viene poi salvata e vale per tutte le paline. Se l’AI non risponde, il pannello mostra solo il dato sicuro (per esempio «44 DEVIATA»).</p>
+  <p class="small">L’intelligenza artificiale non scrive messaggi e non inventa mai gli orari.</p>
 </section>
 
-<section class="card" id="problemi" aria-labelledby="h-problemi">
-  <h2 id="h-problemi">Se qualcosa non va</h2>
-  <p class="muted">I casi più comuni. Il resto è nel manuale. I tasti UP e DOWN sono sulla scheda di controllo, sul retro del pannello.</p>
-  <dl class="rows" style="margin-top:12px">
-    <div><dt>Il pannello è nero</dt><dd>Forse è spento col pulsante o con Alexa: tocca <strong>UP</strong>, di’ «Alexa, accendi palina» o tocca <strong>Accendi il pannello</strong> in palina.local. Altrimenti controlla l’alimentatore da <span class="nw">5 V</span> e il cavo sui morsetti del pannello.</dd></div>
-    <div><dt>Il telefono non vede la rete PALINA</dt><dd>La rete PALINA è accesa solo in configurazione: tieni premuto <strong>DOWN</strong> per 5 secondi per accenderla. Poi avvicinati e spegni e riaccendi il WiFi del telefono.</dd></div>
-    <div><dt>«Password errata o rete non trovata»</dt><dd>Controlla maiuscole e minuscole. Le reti solo a <span class="nw">5 GHz</span> non si vedono: attiva il <span class="nw">2,4 GHz</span> sul router (o sull’hotspot).</dd></div>
-    <div><dt>WIFI... fisso</dt><dd>La rete non c’è più o la password è cambiata. Tieni premuto <strong>DOWN</strong> per 5 secondi: la palina accende la rete PALINA-… e scrive CONFIGURA. Collegati e rifai il passo 1 (<a href="#rete">come si fa</a>). Tenere premuto UP per 5 secondi non serve: riavvia soltanto la palina.</dd></div>
-    <div><dt>NO DATI</dt><dd>La palina è collegata ma non riceve gli orari: di solito si risolve da solo. Se dura, contatta l’assistenza.</dd></div>
-    <div><dt>Mostra le fermate sbagliate</dt><dd>Forse è acceso un altro profilo: tocca UP per cambiare.</dd></div>
-    <div><dt>NESSUN BUS la sera o la domenica</dt><dd>Può essere vero: controlla che la fermata sia quella giusta e il verso di marcia. Gli orari stampati compaiono in arancione.</dd></div>
-    <div><dt>Alexa non trova il dispositivo</dt><dd>Controlla che <strong>Controllo con Alexa</strong> sia spuntato in Display e che tu abbia toccato <strong>Salva</strong>. Echo e palina devono stare sulla stessa rete WiFi di casa, non su un hotspot. Di’ «Alexa, scopri i dispositivi», aspetta circa 45 secondi e, se serve, ripeti.</dd></div>
-    <div><dt>Alexa dice che Palina non risponde</dt><dd>La palina non ha corrente o non è in rete (<span class="nw">WIFI...</span>), oppure il router le ha dato un altro indirizzo: nel router assegnale un indirizzo fisso.</dd></div>
-    <div><dt>Con Alexa si apre il profilo sbagliato</dt><dd>La percentuale decide il profilo. Se hai cambiato nomi, ordine o numero dei profili, aggiorna le routine con le percentuali scritte nella pagina, in Display.</dd></div>
-    <div><dt>palina.local non si apre</dt><dd>Il telefono deve essere sulla stessa rete WiFi della palina. Con alcuni telefoni Android non funziona: usa l’indirizzo numerico mostrato dal router fra i dispositivi collegati.</dd></div>
-  </dl>
+<section class="band" id="domande" aria-labelledby="h-domande">
+  <h2 id="h-domande">Le domande che ci fanno</h2>
+  <div class="faq">
+    <div>
+      <h3>Serve internet? E un telefono?</h3>
+      <p>Sì, serve il WiFi di casa, ma ne usa pochissimo. Il telefono serve solo la prima volta, per preparare la palina: va bene un telefono qualsiasi che si colleghi a internet. Non c’è nessuna app da scaricare.</p>
+    </div>
+    <div>
+      <h3>Quante fermate posso scegliere?</h3>
+      <p>Fino a 4. Se due fermate hanno lo stesso nome, sono i due lati della strada: scegli quello giusto per te.</p>
+    </div>
+    <div>
+      <h3>Posso usarla in più case?</h3>
+      <p>Sì. Puoi preparare più gruppi di fermate, ad esempio «casa» e «nonna», e cambiare con un tocco. Anche il WiFi di un’altra casa si può aggiungere: come si fa è nel manuale.</p>
+    </div>
+    <div>
+      <h3>Cosa succede se salta la corrente?</h3>
+      <p>Quando la corrente torna, la palina si riaccende da sola e rimostra gli arrivi. Ricorda tutto: non devi rifare niente. Se l’avevi spenta apposta, resta spenta.</p>
+    </div>
+    <div>
+      <h3>Si può usare con Alexa?</h3>
+      <p>Sì, ma è facoltativo: con la voce puoi accenderla e spegnerla. Come si fa è scritto nel manuale.</p>
+    </div>
+    <div>
+      <h3>Cosa fa con i miei dati?</h3>
+      <p>Pochi, e solo quelli che servono. La palina tiene a mente il WiFi di casa, il tuo indirizzo e le fermate scelte. La password del WiFi resta dentro la palina e non esce mai.</p>
+      <p>Gli indirizzi che scrivi vanno al nostro computer su internet, che li cerca su OpenStreetMap, una mappa aperta a tutti, per trovare le fermate. Ne tiene una copia (il testo, il luogo trovato e la data) che non è collegata alla tua palina e non viene cancellata da sola. Il nostro computer non conosce il tuo nome e non registra quello che guardi.</p>
+      <p>I dettagli sono nel capitolo «Dati, privacy e fonti» del <a href="PalAIna_Manuale.pdf" download type="application/pdf">manuale</a>.</p>
+    </div>
+  </div>
 </section>
 
-<section class="card" id="privacy" aria-labelledby="h-privacy">
-  <h2 id="h-privacy">Dati, privacy e fonti</h2>
-  <h3>Cosa resta sulla palina</h3>
-  <p>Reti WiFi e password, indirizzo di casa, fermate, destinazioni e impostazioni del display sono salvati nella memoria della palina. Le password WiFi e le impostazioni del display non vanno mai al server.</p>
-  <h3>Cosa riceve il server</h3>
-  <ul class="ticks">
-    <li>il codice identificativo della palina e la sua chiave di accesso (della chiave il server conserva solo un’impronta, non la chiave);</li>
-    <li>a ogni richiesta degli arrivi: i codici delle fermate scelte con i minuti a piedi, il nome e le coordinate delle destinazioni e, se c’è un percorso col treno, le stazioni;</li>
-    <li>durante la configurazione: gli indirizzi che scrivi e le coordinate di casa.</li>
-  </ul>
-  <h3>Cosa conserva il server</h3>
-  <p>Oltre ai dati pubblici di Roma, il server conserva solo tre cose: i codici delle paline (con l’impronta della chiave), la copia degli indirizzi cercati e le risposte dell’AI agli avvisi, che sono uguali per tutte le paline.</p>
-  <p><strong>La copia degli indirizzi.</strong> Per ogni indirizzo che scrivi (casa o destinazione) resta il testo scritto, in minuscolo, con le coordinate e il nome del luogo trovati (o «non trovato») e la data. Serve a non cercare due volte lo stesso indirizzo. Non è legata al codice della tua palina, ma il programma non la cancella mai da solo.</p>
-  <p>Gli indirizzi sono cercati su OpenStreetMap. Per i minuti a piedi, le coordinate di casa e delle fermate vicine vanno anche al servizio di percorsi di OpenStreetMap: il server non le salva.</p>
-  <p class="note">Il server non conosce il tuo nome e il suo programma non registra quello che guardi.</p>
-  <h3>Se usi Alexa</h3>
-  <p>Il controllo con Alexa è spento di serie. Se lo accendi, la palina risponde sulla rete di casa come una lampadina intelligente: chiunque sia collegato allo stesso WiFi può accenderla, spegnerla o cambiare profilo. I comandi vocali li gestisce Alexa, come per ogni dispositivo di casa: per quello che dici ad Alexa valgono le condizioni sulla privacy di Amazon. La palina non manda ad Amazon né fermate né indirizzi.</p>
-  <h3>Fonti dei dati</h3>
-  <dl class="rows">
-    <div><dt>Posizione dei bus, orari, avvisi, notizie di infomobilità</dt><dd><a href="https://romamobilita.it/sistemi-e-tecnologie/open-data/">Roma Servizi per la Mobilità</a>, dati aperti <a class="nw" href="https://creativecommons.org/licenses/by-sa/4.0/deed.it">CC BY-SA 4.0</a></dd></div>
-    <div><dt>Scioperi</dt><dd>Ministero delle Infrastrutture e dei Trasporti, <a href="https://scioperi.mit.gov.it/mit2/public/scioperi">calendario ufficiale</a></dd></div>
-    <div><dt>Treni (percorso bus + treno)</dt><dd>ViaggiaTreno, servizio pubblico di <a href="https://www.trenitalia.com/it.html">Trenitalia</a></dd></div>
-    <div><dt>Meteo</dt><dd><a href="https://open-meteo.com/">Open-Meteo</a>, <a class="nw" href="https://creativecommons.org/licenses/by/4.0/deed.it">CC BY 4.0</a></dd></div>
-    <div><dt>Indirizzi e percorsi a piedi</dt><dd><a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a> (routing: <a href="https://www.fossgis.de/">FOSSGIS</a>)</dd></div>
-    <div><dt>Lettura degli avvisi</dt><dd>Jev, <a href="https://typesafe.ai/">TypeSafe AI</a></dd></div>
-  </dl>
-  <p class="small" style="margin-top:14px">La PalAIna è un progetto indipendente di Elettronica Mangione, non affiliato ad ATAC né a Roma Servizi per la Mobilità. Gli orari sono previsioni: in caso di dubbio fanno fede le informazioni ufficiali.</p>
-</section>
-
-<section class="card" id="manuale" aria-labelledby="h-manuale">
+<section class="band manual" id="manuale" aria-labelledby="h-manuale">
   <h2 id="h-manuale">Vuoi leggere tutto con calma?</h2>
-  <p>Il manuale in PDF ha tutto quello che c’è qui e anche l’elenco dei tasti sul retro del pannello e gli aggiornamenti.</p>
-  <a class="btn" href="PalAIna_Manuale.pdf" download type="application/pdf" style="margin-top:16px;max-width:440px">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>
-    <span>Scarica il manuale <span class="nw">(PDF, 1,0 MB)</span></span>
+  <p class="lead">Il manuale spiega ogni cosa, passo dopo passo.</p>
+  <a class="btn" href="PalAIna_Manuale.pdf" download type="application/pdf">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>
+    <span>Scarica il manuale completo <span class="nw">(PDF, 1,0 MB)</span></span>
   </a>
+
+  <details class="sources">
+    <summary>Da dove vengono i dati</summary>
+    <div class="in">
+      <dl>
+        <div><dt>Posizione dei bus, orari, avvisi, notizie di infomobilità</dt><dd><a href="https://romamobilita.it/sistemi-e-tecnologie/open-data/">Roma Servizi per la Mobilità</a>, dati aperti <a class="nw" href="https://creativecommons.org/licenses/by-sa/4.0/deed.it">CC BY-SA 4.0</a></dd></div>
+        <div><dt>Scioperi</dt><dd>Ministero delle Infrastrutture e dei Trasporti, <a href="https://scioperi.mit.gov.it/mit2/public/scioperi">calendario ufficiale</a></dd></div>
+        <div><dt>Treni (percorso bus + treno)</dt><dd>ViaggiaTreno, servizio pubblico di <a href="https://www.trenitalia.com/it.html">Trenitalia</a></dd></div>
+        <div><dt>Meteo</dt><dd><a href="https://open-meteo.com/">Open-Meteo</a>, <a class="nw" href="https://creativecommons.org/licenses/by/4.0/deed.it">CC BY 4.0</a></dd></div>
+        <div><dt>Indirizzi e percorsi a piedi</dt><dd><a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a> (routing: <a href="https://www.fossgis.de/">FOSSGIS</a>)</dd></div>
+        <div><dt>Lettura degli avvisi</dt><dd>Jev, <a href="https://typesafe.ai/">TypeSafe AI</a></dd></div>
+      </dl>
+      <p class="small">La PalAIna è un progetto indipendente di Elettronica Mangione, non affiliato ad ATAC né a Roma Servizi per la Mobilità. Gli orari sono previsioni: in caso di dubbio fanno fede le informazioni ufficiali.</p>
+    </div>
+  </details>
 </section>
 
 </main>
 
 <footer>
-  <p class="attr"><span>Dati: <a href="https://romamobilita.it/sistemi-e-tecnologie/open-data/">Roma Servizi per la Mobilità</a> (<a class="nw" href="https://creativecommons.org/licenses/by-sa/4.0/deed.it">CC BY-SA 4.0</a>)</span><span class="sep"> · </span><span>Indirizzi: <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap</a></span></p>
+  <p class="attr"><span>Dati: <a href="https://romamobilita.it/sistemi-e-tecnologie/open-data/">Roma Servizi per la Mobilità</a> (<a class="nw" href="https://creativecommons.org/licenses/by-sa/4.0/deed.it">CC BY-SA 4.0</a>)</span><span class="sep"> · </span><span>Indirizzi: <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a></span></p>
   <p>Progetto indipendente di Elettronica Mangione, non affiliato ad ATAC.</p>
   <p class="links"><a href="https://www.el-man.it">www.el-man.it</a><a href="mailto:el-man@el-man.it">el-man@el-man.it</a></p>
 </footer>
+<script>
+/* la stampa mostra anche le fonti */
+addEventListener('beforeprint',function(){document.querySelectorAll('details').forEach(function(d){d.open=true})});
+</script>
 </body>
 </html>
