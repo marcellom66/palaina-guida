@@ -264,6 +264,7 @@ footer .attr .sep{display:none}
       <p>Scegli la rete di casa dall’elenco, scrivi la sua password e tocca <strong>Collega</strong>. In pochi secondi la pagina conferma <strong>Collegato!</strong> e passa al passo successivo.</p>
       <p><strong>Non ricordi la password?</strong> Se il router ha il tasto <strong>WPS</strong>, apri la voce «Non ricordi la password?», tocca <strong>Collega senza password (WPS)</strong> e poi, entro due minuti, premi il tasto WPS sul router. Il display mostra «PREMI WPS SUL ROUTER».</p>
       <p class="small">Mentre la palina si collega, il telefono può staccarsi per un attimo dalla rete PALINA: ricollegati e la pagina prosegue.</p>
+      <p class="small">Più avanti, per cambiare rete o aggiungerne una, tieni premuto <strong>DOWN</strong> per 5 secondi: <a href="#rete">come si fa</a>.</p>
     </div>
     <figure class="shot"><img src="img/wifi.webp" width="780" height="1601" loading="lazy" style="--ar:780/1545"
       alt="Passo 1: la pagina «WiFi di casa» con l’elenco delle reti, la password e il pulsante Collega."></figure>
@@ -314,6 +315,29 @@ footer .attr .sep{display:none}
     <figure class="shot"><img src="img/display.webp" width="780" height="872" loading="lazy" style="--ar:780/872"
       alt="Passo 4: la pagina «Display» con la luminosità di giorno e di notte e le ore della notte."></figure>
   </article>
+</section>
+
+<section class="card" id="rete" aria-labelledby="h-rete">
+  <h2 id="h-rete">Cambiare rete WiFi o usare l’hotspot</h2>
+  <p>La palina ricorda fino a <strong>4 reti</strong> e all’accensione si collega a quella che trova con il segnale migliore: puoi portarla in un’altra casa, o usarla con l’hotspot del telefono, senza ricominciare da capo.</p>
+
+  <h3>Il modo più semplice: tieni premuto DOWN per 5 secondi</h3>
+  <ol class="how">
+    <li>Sul retro del pannello, tieni premuto il tasto <strong>DOWN</strong> per <strong>5 secondi</strong>. Il display scrive <strong>CONFIGURA</strong>, il nome della rete <strong class="nw">PALINA-…</strong> e la password. Funziona anche se la rete di casa è vicina, e anche a pannello spento.</li>
+    <li>Sul telefono collegati alla rete <strong class="nw">PALINA-…</strong> con quella password. La pagina si apre da sola e parte dal passo 1, <strong>WiFi di casa</strong>.</li>
+    <li>Scegli la rete, scrivi la password e tocca <strong>Collega</strong>. La palina ricorda la rete e si riavvia da sola: fermate e impostazioni restano. La pagina sul telefono può restare ferma: guarda il pannello.</li>
+  </ol>
+  <p class="note"><strong>Quando finisce.</strong> In questo modo la palina non si ricollega da sola alle reti che conosce: aspetta te. Si riavvia appena colleghi una rete, oppure <strong>dopo 10 minuti</strong> se nessuno ha fatto niente, e torna normale. Ci hai ripensato? Nel passo 1 tocca <strong>Annulla e riavvia la palina</strong> (compare se la palina è già configurata) e conferma: si riavvia e torna tutto come prima, con reti e fermate salvate. In alternativa tieni premuto <strong>UP</strong> per 5 secondi (riavvia la palina). Se il pannello era spento, dopo il riavvio torna spento: tocca UP.</p>
+
+  <h3>Preparare l’hotspot del telefono (per le fiere e le dimostrazioni)</h3>
+  <p>Se in fiera non c’è il WiFi di casa, la palina può collegarsi al telefono usato come hotspot. Si prepara una volta sola, meglio a casa:</p>
+  <ol class="how">
+    <li>Imposta l’hotspot a <strong class="nw">2,4 GHz</strong>: la palina non vede il <span class="nw">5 GHz</span>. Su <strong>iPhone</strong> attiva <strong>Massimizza compatibilità</strong> (Impostazioni → Hotspot personale); su <strong>Android</strong> scegli la banda <strong class="nw">2,4 GHz</strong> nelle impostazioni dell’hotspot WiFi.</li>
+    <li>Dai all’hotspot una password semplice: almeno 8 caratteri, solo lettere e numeri, e un nome senza accenti.</li>
+    <li>Tieni acceso l’hotspot e tieni premuto <strong>DOWN</strong> sulla palina per 5 secondi.</li>
+    <li>Con un <strong>altro</strong> telefono o un computer, collegati a <strong class="nw">PALINA-…</strong>, scegli il nome dell’hotspot nel passo 1 e scrivi la sua password. Con lo stesso telefono non va: collegandoti a PALINA, il telefono spegne l’hotspot.</li>
+  </ol>
+  <p class="note"><strong>Il giorno della fiera.</strong> Accendi l’hotspot <strong>prima</strong> di dare corrente alla palina: si collega da sola. Se lo accendi dopo, la palina mostra CONFIGURA e riprova ogni mezzo minuto: appena lo trova si collega e si riavvia, senza toccare niente.</p>
 </section>
 
 <section class="card" id="profili" aria-labelledby="h-profili">
@@ -441,9 +465,9 @@ footer .attr .sep{display:none}
   <p class="muted">I casi più comuni. Il resto è nel manuale. I tasti UP e DOWN sono sulla scheda di controllo, sul retro del pannello.</p>
   <dl class="rows" style="margin-top:12px">
     <div><dt>Il pannello è nero</dt><dd>Forse è spento col pulsante o con Alexa: tocca <strong>UP</strong>, di’ «Alexa, accendi palina» o tocca <strong>Accendi il pannello</strong> in palina.local. Altrimenti controlla l’alimentatore da <span class="nw">5 V</span> e il cavo sui morsetti del pannello.</dd></div>
-    <div><dt>Il telefono non vede la rete PALINA</dt><dd>Avvicinati; spegni e riaccendi il WiFi del telefono; premi DOWN per rivedere nome e password.</dd></div>
-    <div><dt>«Password errata o rete non trovata»</dt><dd>Controlla maiuscole e minuscole. Le reti solo a <span class="nw">5 GHz</span> non si vedono: attiva il <span class="nw">2,4 GHz</span> sul router.</dd></div>
-    <div><dt>WIFI... fisso</dt><dd>La rete non c’è più o la password è cambiata. Aspetta un minuto: la palina accende da sola la rete PALINA-… e scrive CONFIGURA. Collegati e rifai il passo 1 della configurazione. Tenere premuto UP per 5 secondi non serve: riavvia soltanto la palina.</dd></div>
+    <div><dt>Il telefono non vede la rete PALINA</dt><dd>La rete PALINA è accesa solo in configurazione: tieni premuto <strong>DOWN</strong> per 5 secondi per accenderla. Poi avvicinati e spegni e riaccendi il WiFi del telefono.</dd></div>
+    <div><dt>«Password errata o rete non trovata»</dt><dd>Controlla maiuscole e minuscole. Le reti solo a <span class="nw">5 GHz</span> non si vedono: attiva il <span class="nw">2,4 GHz</span> sul router (o sull’hotspot).</dd></div>
+    <div><dt>WIFI... fisso</dt><dd>La rete non c’è più o la password è cambiata. Tieni premuto <strong>DOWN</strong> per 5 secondi: la palina accende la rete PALINA-… e scrive CONFIGURA. Collegati e rifai il passo 1 (<a href="#rete">come si fa</a>). Tenere premuto UP per 5 secondi non serve: riavvia soltanto la palina.</dd></div>
     <div><dt>NO DATI</dt><dd>La palina è collegata ma non riceve gli orari: di solito si risolve da solo. Se dura, contatta l’assistenza.</dd></div>
     <div><dt>Mostra le fermate sbagliate</dt><dd>Forse è acceso un altro profilo: tocca UP per cambiare.</dd></div>
     <div><dt>NESSUN BUS la sera o la domenica</dt><dd>Può essere vero: controlla che la fermata sia quella giusta e il verso di marcia. Gli orari stampati compaiono in arancione.</dd></div>
@@ -485,7 +509,7 @@ footer .attr .sep{display:none}
 
 <section class="card" id="manuale" aria-labelledby="h-manuale">
   <h2 id="h-manuale">Vuoi leggere tutto con calma?</h2>
-  <p>Il manuale in PDF ha tutto quello che c’è qui e anche come cambiare rete WiFi, i tasti sul retro del pannello e gli aggiornamenti.</p>
+  <p>Il manuale in PDF ha tutto quello che c’è qui e anche l’elenco dei tasti sul retro del pannello e gli aggiornamenti.</p>
   <a class="btn" href="PalAIna_Manuale.pdf" download type="application/pdf" style="margin-top:16px;max-width:440px">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>
     <span>Scarica il manuale <span class="nw">(PDF, 1,0 MB)</span></span>
