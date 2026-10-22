@@ -214,6 +214,8 @@ figcaption{color:var(--mut);font-size:16px;line-height:1.45;margin-top:10px;text
 .btn svg{flex:none}
 .manual{text-align:center}
 .manual .btn{margin:22px auto 0}
+.note-form{max-width:34em;margin:16px auto 0}
+.note-form a{display:inline-flex;align-items:center;min-height:44px;font-weight:700}
 .sources{margin-top:34px;text-align:left;border:1px solid var(--line);border-radius:16px;background:var(--card)}
 .sources summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:10px 18px;font-weight:700;font-size:18px;cursor:pointer;list-style:none}
 .sources summary::-webkit-details-marker{display:none}
@@ -292,7 +294,8 @@ footer .attr .sep{display:none}
     <a href="#come-si-legge">Come si legge</a>
     <a href="#come-si-mette">Per iniziare</a>
     <a href="#domande">Domande</a>
-    <a class="pdf" href="PalAIna_Manuale.pdf" download type="application/pdf">Manuale PDF</a>
+    <a href="#parere">Sondaggio</a>
+    <a class="pdf" href="PalAIna_Manuale.pdf" download type="application/pdf">Manuale</a>
   </nav>
 </header>
 
@@ -475,6 +478,16 @@ footer .attr .sep{display:none}
       <p>I dettagli sono nel capitolo «Dati, privacy e fonti» del <a href="PalAIna_Manuale.pdf" download type="application/pdf">manuale</a>.</p>
     </div>
   </div>
+</section>
+
+<section class="band manual" id="parere" aria-labelledby="h-parere">
+  <h2 id="h-parere">Dicci cosa ne pensi</h2>
+  <p class="lead">Ci regali due minuti? Vogliamo sapere quanto la pagheresti, cosa ti è piaciuto e cosa cambieresti. Puoi anche farci una domanda.</p>
+  <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSczAzJyBeX4hV1F4oabbmp8IYEO8pQm3m4nvt4PR_h4EnLmIA/viewform" target="_blank" rel="noopener">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>
+    <span>Rispondi al sondaggio <span class="nw">(2 minuti)</span></span>
+  </a>
+  <p class="small note-form">Si apre una pagina di Google. Non serve nessun account e le risposte sono anonime: nome ed email sono facoltativi, servono solo se vuoi che ti rispondiamo. Preferisci scrivere? <a href="mailto:el-man@el-man.it">el-man@el-man.it</a></p>
 </section>
 
 <section class="band manual" id="manuale" aria-labelledby="h-manuale">
